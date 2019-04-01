@@ -5,39 +5,30 @@ import CardList from './CardList';
 import Scroll from './Scroll';
 
 import './App.css';
-import axios from 'axios';
+
+import { connect } from 'react-redux';
+import { setSearchField, getData } from '../actions';
 
 class App extends Component {
-  state = {
-    robots: [],
-    searchfield: ''
-  };
+  // state = {
+  //   robots: []
+  // };
 
-  componentDidMount = async () => {
-    const req = await axios.get('https://jsonplaceholder.typicode.com/users');
-
-    console.log(req.data);
-
-    this.setState({ robots: req.data });
-  };
-
-  onSearchChange = e => {
-    this.setState({
-      searchfield: e.target.value
-    });
-  };
+  componentDidMount() {
+    this.props.onRequestRobots();
+  }
 
   render() {
-    const filteredRobots = this.state.robots.filter(robot => {
-      return robot.name
-        .toLowerCase()
-        .includes(this.state.searchfield.toLowerCase());
+    // const { robots } = this.state;
+    const { searchField, onSearchChange, robots } = this.props;
+    const filteredRobots = robots.filter(robot => {
+      return robot.name.toLowerCase().includes(searchField.toLowerCase());
     });
 
     return (
       <div className="tc ">
         <h1 className="f1">RoboFriends</h1>
-        <SearchBox searchChange={this.onSearchChange} />
+        <SearchBox searchChange={onSearchChange} />
         <Scroll>
           <CardList robots={filteredRobots} />
         </Scroll>
@@ -46,4 +37,22 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapState = state => {
+  console.log(state);
+  return {
+    searchField: state.Robots.searchField,
+    robots: state.GetRobots.robots
+  };
+};
+
+const mapDispatch = dispatch => {
+  return {
+    onSearchChange: event => dispatch(setSearchField(event.target.value)),
+    onRequestRobots: () => dispatch(getData())
+  };
+};
+
+export default connect(
+  mapState,
+  mapDispatch
+)(App);

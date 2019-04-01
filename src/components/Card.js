@@ -6,11 +6,18 @@ const Card = ({ email, name, id }) => {
     <div className="bg-light-green dib br3 pa3  ma2 grow bw2 shadow-5">
       <img src={`https://robohash.org/${id}?200x200`} alt="robots" />
       <div>
-        <h2>{name}</h2>
-        <p>{email}</p>
+        <h2 style={styles.title}>{name}</h2>
+        <p style={styles.email}>{email}</p>
       </div>
     </div>
   );
+};
+
+const styles = {
+  title: { color: 'white' },
+  email: {
+    color: 'white'
+  }
 };
 
 export default Card;
