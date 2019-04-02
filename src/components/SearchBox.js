@@ -5,6 +5,7 @@ const searchBox = props => {
   return (
     <div className="pa4">
       <input
+        aria-label="Search Robots"
         className="pa3 ba b--green bg-lightest-blue"
         type="text"
         placeholder="Search your favorite robot"
