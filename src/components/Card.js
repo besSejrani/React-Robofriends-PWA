@@ -14,7 +14,9 @@ const Card = ({ email, name, id }) => {
 };
 
 const styles = {
-  title: { color: 'white' },
+  title: {
+    color: 'white'
+  },
   email: {
     color: 'white'
   }
