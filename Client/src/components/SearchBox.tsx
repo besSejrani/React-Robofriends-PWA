@@ -1,4 +1,4 @@
-import { createStyles, makeStyles, TextField } from "@material-ui/core";
+import { makeStyles, TextField } from "@material-ui/core";
 import React, { FunctionComponent } from "react";
 import { connect } from "react-redux";
 import { searchField } from "../redux/actions";
