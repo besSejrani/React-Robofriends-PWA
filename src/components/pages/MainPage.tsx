@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import SearchBox from "../SearchBox";
 import CardList from "../CardList";
