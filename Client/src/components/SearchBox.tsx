@@ -1,19 +1,27 @@
+import { createStyles, makeStyles, TextField } from "@material-ui/core";
 import React, { FunctionComponent } from "react";
 import { connect } from "react-redux";
 import { searchField } from "../redux/actions";
 
-const searchBox: FunctionComponent<any> = ({ searchField }) => {
+const useStyles = makeStyles({
+  root: {
+    margin: "15% 25% 0% 25%",
+    display: "flex",
+    justifyContent: "center",
+  },
+});
+
+const SearchBox: FunctionComponent<any> = ({ searchField }) => {
+  const classes = useStyles();
   return (
-    <div className="pa4">
-      <input
-        aria-label="Search Robots"
-        className="pa3 ba b--green bg-lightest-blue"
-        type="text"
-        placeholder="Search your favorite robot"
-        onChange={(e) => searchField(e.target.value)}
-      />
-    </div>
+    <TextField
+      className={classes.root}
+      id="standard-basic"
+      label="Robot Search"
+      onChange={(e) => searchField(e.target.value)}
+      margin="normal"
+    />
   );
 };
 
-export default connect(null, { searchField })(searchBox);
+export default connect(null, { searchField })(SearchBox);

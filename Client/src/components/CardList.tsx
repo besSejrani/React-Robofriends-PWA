@@ -1,6 +1,8 @@
+import { makeStyles } from "@material-ui/core";
 import React, { FunctionComponent } from "react";
-import Card from "./Card";
+
 import { connect } from "react-redux";
+import MaterialCard from "./MaterialCard";
 
 type CardListProps = {
   robots: any[];
@@ -8,20 +10,20 @@ type CardListProps = {
 };
 
 const CardList: FunctionComponent<CardListProps> = ({ robots, searchField }) => {
+  const classes = useStyles();
+
   const filteredRobots = () => {
     return robots.filter((robot) => robot.name.toLowerCase().includes(searchField.toLowerCase()));
   };
 
-  console.log("filter", filteredRobots());
-
   const cardComponent = () => {
     return filteredRobots().map((robot, i) => {
       console.log("bla", robot);
-      return <Card key={robot.id} name={robots[i].name} email={robots[i].email} id={robots[i].id} />;
+      return <MaterialCard key={robot.id} name={robots[i].name} email={robots[i].email} id={robots[i].id} />;
     });
   };
 
-  return <div>{cardComponent()}</div>;
+  return <div className={classes.root}>{cardComponent()}</div>;
 };
 
 const mapState = (state: any) => {
@@ -32,3 +34,13 @@ const mapState = (state: any) => {
 };
 
 export default connect(mapState)(CardList);
+
+const useStyles = makeStyles({
+  root: {
+    margin: "5% 20% 5% 20%",
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
