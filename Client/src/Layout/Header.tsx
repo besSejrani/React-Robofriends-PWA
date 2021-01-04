@@ -17,7 +17,7 @@ export default function SearchAppBar() {
           </IconButton>
 
           <Typography className={classes.title} variant="h6" noWrap>
-            <Link to="/" activeStyle={{ color: "white" }}>
+            <Link to="/" activeStyle={{ color: "white", textDecoration: "none" }}>
               RoboFriends
             </Link>
           </Typography>
