@@ -12,7 +12,6 @@ const MaterialCard: React.FC<MaterialCard> = ({ name, email, id }) => {
   const classes = useStyles();
 
   return (
-    /*     <Paper variant="outlined"> */
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
@@ -24,7 +23,7 @@ const MaterialCard: React.FC<MaterialCard> = ({ name, email, id }) => {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+            {name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {email}
@@ -32,7 +31,6 @@ const MaterialCard: React.FC<MaterialCard> = ({ name, email, id }) => {
         </CardContent>
       </CardActionArea>
     </Card>
-    /*  </Paper> */
   );
 };
 

@@ -5,7 +5,7 @@ import { searchField } from "../redux/actions";
 
 const useStyles = makeStyles({
   root: {
-    margin: "15% 25% 0% 25%",
+    margin: "20% 5% 10% 5%",
     display: "flex",
     justifyContent: "center",
   },

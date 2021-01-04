@@ -1,5 +1,5 @@
 import React from "react";
-import Appbar from "./Appbar";
+import Header from "./Header";
 import { ThemeProvider } from "@material-ui/core";
 import { theme } from "./Theme";
 import Tab from "./Tab";
@@ -12,7 +12,7 @@ const index: React.FC<Nav> = ({ children }) => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Appbar />
+        <Header />
         {children}
         <Tab />
       </ThemeProvider>

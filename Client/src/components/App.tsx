@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { getRobots } from "../redux/actions";
 
 import Layout from "../Layout/index";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import RobotDetail from "../pages/RobotDetail";
 
 const App: React.FC<any> = ({ getRobots }) => {
   useEffect(() => {
@@ -16,9 +18,14 @@ const App: React.FC<any> = ({ getRobots }) => {
   });
 
   return (
-    <Layout>
-      <MainPage />
-    </Layout>
+    <Router>
+      <Switch>
+        <Layout>
+          <Route exact path="/" component={MainPage} />
+          <Route exact path="/friend/:id" component={RobotDetail} />
+        </Layout>
+      </Switch>
+    </Router>
   );
 };
 
