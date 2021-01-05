@@ -7,16 +7,15 @@ import { getRobot } from "../redux/actions/index";
 import {
   Card,
   CardActionArea,
-  CardContent,
   CardMedia,
   makeStyles,
-  Typography,
   Container,
   List,
   ListItem,
   ListItemText,
   ListItemAvatar,
   Avatar,
+  Paper
 } from "@material-ui/core";
 
 import { theme } from "../Layout/Theme";
@@ -40,6 +39,8 @@ const RobotDetail: React.FC<any> = ({ getRobot, robot }) => {
 
   return (
     <Container className={classes.container}>
+      <Card className={classes.group}>
+
       <Card className={classes.root}>
         <CardActionArea>
           <CardMedia
@@ -48,7 +49,7 @@ const RobotDetail: React.FC<any> = ({ getRobot, robot }) => {
             height="250"
             image={`https://robohash.org/${robot.id}?size=250x250`}
             title={robot.name}
-          />
+            />
         </CardActionArea>
       </Card>
 
@@ -98,6 +99,7 @@ const RobotDetail: React.FC<any> = ({ getRobot, robot }) => {
           <ListItemText primary="Website" secondary={robot.website} />
         </ListItem>
       </List>
+</Card>
     </Container>
   );
 };
@@ -108,6 +110,16 @@ const useStyles = makeStyles({
     justifyContent: "space-evenly",
     alignItems: "center",
     height: "100vh",
+  },
+  group:{
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    width: "70%",
+    [theme.breakpoints.down("sm")]:{
+      flexDirection: "column",
+      margin: "10% 0%"
+    }
   },
   root: {
     width: 300,

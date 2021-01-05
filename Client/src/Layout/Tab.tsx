@@ -1,9 +1,44 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper, Hidden, Tabs, Tab, Link } from "@material-ui/core";
+import {  Hidden, Link, BottomNavigation, BottomNavigationAction } from "@material-ui/core";
 
+import {Link as LinkDom} from "react-router-dom"
+
+import HomeIcon from '@material-ui/icons/Home';
 import GithubIcon from "@material-ui/icons/GitHub";
-import WebIcon from "@material-ui/icons/Web";
+import WebIcon from "@material-ui/icons/Public";
+
+
+const TabNavigation = ()=> {
+
+  const classes = useStyles();
+
+  return (
+    <Hidden only={["sm", "md", "lg", "xl"]}>
+
+      <BottomNavigation
+      className={classes.root}
+      >
+      <LinkDom to="/" style={{ width: "100%" }}>
+      <BottomNavigationAction label="Home" icon={<HomeIcon />} style={{ width: "100%" }}/>
+      </LinkDom>
+      
+      <Link href="https://github.com/besSejrani" style={{ width: "100%" }}>
+
+      <BottomNavigationAction label="Github" icon={<GithubIcon />} style={{ width: "100%" }}/>
+      </Link>
+
+      <Link href="https://robohash.org/" style={{ width: "100%" }}>
+      <BottomNavigationAction label="API" icon={<WebIcon />} style={{ width: "100%", justifySelf: "center" }}/>
+      </Link>
+    </BottomNavigation>
+
+    </Hidden>
+  );
+}
+
+export default TabNavigation
+
 
 const useStyles = makeStyles({
   root: {
@@ -14,33 +49,6 @@ const useStyles = makeStyles({
   },
 });
 
-export default function IconTabs() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
 
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
-  };
 
-  return (
-    <Hidden only={["sm", "md", "lg", "xl"]}>
-      <Paper square className={classes.root}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          variant="fullWidth"
-          indicatorColor="primary"
-          textColor="primary"
-          aria-label="icon tabs example"
-        >
-          <Link href="https://github.com/besSejrani" style={{ width: "100%" }}>
-            <Tab icon={<GithubIcon />} aria-label="github" style={{ width: "100%" }} />
-          </Link>
-          <Link href="https://robohash.org/" style={{ width: "100%" }}>
-            <Tab icon={<WebIcon />} aria-label="web" style={{ width: "100%" }} />
-          </Link>
-        </Tabs>
-      </Paper>
-    </Hidden>
-  );
-}
+

@@ -1,14 +1,13 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Card, CardActionArea, CardContent, CardMedia, Typography, Paper } from "@material-ui/core";
+import { Card, CardActionArea, CardContent, CardMedia, Typography} from "@material-ui/core";
 
 type MaterialCard = {
   name: string;
-  email: string;
   id: number;
 };
 
-const MaterialCard: React.FC<MaterialCard> = ({ name, email, id }) => {
+const MaterialCard: React.FC<MaterialCard> = ({ name, id }) => {
   const classes = useStyles();
 
   return (
@@ -22,11 +21,8 @@ const MaterialCard: React.FC<MaterialCard> = ({ name, email, id }) => {
           title={name}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h5" component="h2" style={{textAlign: "center"}}>
             {name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {email}
           </Typography>
         </CardContent>
       </CardActionArea>

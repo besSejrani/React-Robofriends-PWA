@@ -23,7 +23,7 @@ const CardList: FunctionComponent<CardListProps> = ({ robots, searchField }) => 
       console.log("bla", robot);
       return (
         <Link to={`/friend/${robot.id}`} key={robot.id} style={{ textDecoration: "none" }}>
-          <MaterialCard name={robots[i].name} email={robots[i].email} id={robots[i].id} />
+          <MaterialCard name={robots[i].name} id={robots[i].id} />
         </Link>
       );
     });
