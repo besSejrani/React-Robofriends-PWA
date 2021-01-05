@@ -32,15 +32,6 @@ const CardList: FunctionComponent<CardListProps> = ({ robots, searchField }) => 
   return <div className={classes.root}>{cardComponent()}</div>;
 };
 
-const mapState = (state: IAppState) => {
-  return {
-    searchField: state.search.search,
-    robots: state.robots.robots,
-  };
-};
-
-export default connect(mapState)(CardList);
-
 const useStyles = makeStyles({
   root: {
     margin: "5% 0% 5% 0%",
@@ -50,3 +41,12 @@ const useStyles = makeStyles({
     alignItems: "center",
   },
 });
+
+const mapState = (state: IAppState) => {
+  return {
+    searchField: state.search.search,
+    robots: state.robots.robots,
+  };
+};
+
+export default connect(mapState)(CardList);

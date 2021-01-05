@@ -4,7 +4,27 @@ import { IAppState } from "../redux/reducers";
 
 import { connect } from "react-redux";
 import { getRobot } from "../redux/actions/index";
-import { Card, CardActionArea, CardContent, CardMedia, makeStyles, Typography, Container } from "@material-ui/core";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  makeStyles,
+  Typography,
+  Container,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+} from "@material-ui/core";
+
+import { theme } from "../Layout/Theme";
+import PersonIcon from "@material-ui/icons/Person";
+import FingerPrintIcon from "@material-ui/icons/Fingerprint";
+import EmailIcon from "@material-ui/icons/Email";
+import PhoneIcon from "@material-ui/icons/Phone";
+import WebsiteIcon from "@material-ui/icons/Public";
 
 const RobotDetail: React.FC<any> = ({ getRobot, robot }) => {
   const { id } = useParams<{ id: string }>();
@@ -19,7 +39,7 @@ const RobotDetail: React.FC<any> = ({ getRobot, robot }) => {
   }, []);
 
   return (
-    <Container>
+    <Container className={classes.container}>
       <Card className={classes.root}>
         <CardActionArea>
           <CardMedia
@@ -29,34 +49,73 @@ const RobotDetail: React.FC<any> = ({ getRobot, robot }) => {
             image={`https://robohash.org/${robot.id}?size=250x250`}
             title={robot.name}
           />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {robot.name}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {robot.email}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {robot.username}
-            </Typography>
-
-            <Typography variant="body2" color="textSecondary" component="p">
-              {robot.phone}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {robot.website}
-            </Typography>
-          </CardContent>
         </CardActionArea>
       </Card>
+
+      <List className={classes.list}>
+        <ListItem>
+          <ListItemAvatar>
+            <Avatar>
+              <PersonIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary="Name" secondary={robot.name} />
+        </ListItem>
+
+        <ListItem>
+          <ListItemAvatar>
+            <Avatar>
+              <FingerPrintIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary="Username" secondary={robot.username} />
+        </ListItem>
+
+        <ListItem>
+          <ListItemAvatar>
+            <Avatar>
+              <EmailIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary="Email" secondary={robot.email} />
+        </ListItem>
+
+        <ListItem>
+          <ListItemAvatar>
+            <Avatar>
+              <PhoneIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary="Phone" secondary={robot.phone} />
+        </ListItem>
+
+        <ListItem>
+          <ListItemAvatar>
+            <Avatar>
+              <WebsiteIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary="Website" secondary={robot.website} />
+        </ListItem>
+      </List>
     </Container>
   );
 };
 
 const useStyles = makeStyles({
+  container: {
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    height: "100vh",
+  },
   root: {
     width: 300,
-    margin: "25% 0% 10% 0%",
+  },
+  list: {
+    width: "100%",
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
   },
 });
 
