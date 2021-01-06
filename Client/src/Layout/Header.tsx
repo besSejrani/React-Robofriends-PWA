@@ -5,14 +5,23 @@ import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 
-export default function SearchAppBar() {
+import { connect } from "react-redux";
+import { toggleSideDrawer } from "../redux/ui/uiActions";
+
+const Header: React.FC<any> = ({ toggleSideDrawer }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <AppBar position="fixed">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="open drawer">
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="open drawer"
+            onClick={toggleSideDrawer}
+          >
             <MenuIcon />
           </IconButton>
 
@@ -25,7 +34,9 @@ export default function SearchAppBar() {
       </AppBar>
     </div>
   );
-}
+};
+
+export default connect(null, { toggleSideDrawer })(Header);
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./Header";
 import { ThemeProvider } from "@material-ui/core";
 import { theme } from "./Theme";
+import SideBar from "./SideDrawer";
 import Tab from "./Tab";
 
 type Nav = {
@@ -14,6 +15,7 @@ const index: React.FC<Nav> = ({ children }) => {
       <ThemeProvider theme={theme}>
         <Header />
         {children}
+        <SideBar />
         <Tab />
       </ThemeProvider>
     </>
