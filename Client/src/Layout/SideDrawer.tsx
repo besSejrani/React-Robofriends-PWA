@@ -8,38 +8,21 @@ import MailIcon from "@material-ui/icons/Mail";
 
 import { connect } from "react-redux";
 import { toggleSideDrawer } from "../redux/ui/uiActions";
-import { IAppState } from "src/redux/reducers";
+import { IAppState } from "src/redux/rootReducer";
 
-type Anchor = "top" | "left" | "bottom" | "right";
+type Anchor = "left";
 
 const SideDrawer: React.FC<any> = ({ isSideDrawerOpen, toggleSideDrawer }) => {
   const classes = useStyles();
+
   const [state, setState] = React.useState({
     left: false,
   });
 
-  const toggleDrawer = (anchor: Anchor, isSideDrawerOpen: boolean) => (
-    event: React.KeyboardEvent | React.MouseEvent
-  ) => {
-    if (
-      event.type === "keydown" &&
-      ((event as React.KeyboardEvent).key === "Tab" || (event as React.KeyboardEvent).key === "Shift")
-    ) {
-      return;
-    }
 
-    setState({ ...state, [anchor]: isSideDrawerOpen });
-  };
 
   const list = (anchor: Anchor) => (
-    <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === "top" || anchor === "bottom",
-      })}
-      role="presentation"
-      onClick={toggleDrawer(anchor, isSideDrawerOpen)}
-      onKeyDown={toggleDrawer(anchor, isSideDrawerOpen)}
-    >
+    <div className={classes.list}>
       <List>
         {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
           <ListItem button key={text}>
@@ -48,7 +31,9 @@ const SideDrawer: React.FC<any> = ({ isSideDrawerOpen, toggleSideDrawer }) => {
           </ListItem>
         ))}
       </List>
+
       <Divider />
+
       <List>
         {["All mail", "Trash", "Spam"].map((text, index) => (
           <ListItem button key={text}>
@@ -64,7 +49,6 @@ const SideDrawer: React.FC<any> = ({ isSideDrawerOpen, toggleSideDrawer }) => {
     <div>
       {(["left"] as Anchor[]).map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
           <Drawer anchor={anchor} open={isSideDrawerOpen} onClose={toggleSideDrawer}>
             {list(anchor)}
           </Drawer>
@@ -85,8 +69,5 @@ export default connect(mapState, { toggleSideDrawer })(SideDrawer);
 const useStyles = makeStyles({
   list: {
     width: 250,
-  },
-  fullList: {
-    width: "auto",
   },
 });

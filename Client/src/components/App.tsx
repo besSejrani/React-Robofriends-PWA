@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import MainPage from "../pages/MainPage";
 
 import { connect } from "react-redux";
-import { getRobots } from "../redux/actions";
+import { getRobots } from "../redux/robots/robotActions";
 
 import Layout from "../Layout/index";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";

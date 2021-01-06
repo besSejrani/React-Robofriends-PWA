@@ -14,6 +14,7 @@ const MaterialCard: React.FC<MaterialCard> = ({ name, id }) => {
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
+        className={classes.cardImage}
           component="img"
           alt="Robo hash api"
           height="250"
@@ -37,4 +38,7 @@ const useStyles = makeStyles({
     width: 300,
     margin: "10px 10px",
   },
+  cardImage: {
+    height: "auto",
+  }
 });

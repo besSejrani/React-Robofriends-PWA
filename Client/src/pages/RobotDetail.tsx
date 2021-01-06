@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { IAppState } from "../redux/reducers";
+import { IAppState } from "../redux/rootReducer";
 
 import { connect } from "react-redux";
-import { getRobot } from "../redux/actions/index";
+import { getRobot } from "../redux/robots/robotActions";
 import {
   Card,
   CardActionArea,
@@ -40,12 +40,11 @@ const RobotDetail: React.FC<any> = ({ getRobot, robot }) => {
   return (
     <Container className={classes.container}>
       <Card className={classes.group}>
-        <Card className={classes.root}>
+        <Card >
           <CardActionArea>
             <CardMedia
               component="img"
               alt="Robo hash api"
-              height="250"
               image={`https://robohash.org/${robot.id}?size=250x250`}
               title={robot.name}
             />
@@ -123,9 +122,6 @@ const useStyles = makeStyles({
       flexDirection: "column",
       width: "100%",
     },
-  },
-  root: {
-    width: 300,
   },
   list: {
     width: "100%",

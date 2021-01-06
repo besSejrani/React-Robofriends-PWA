@@ -1,7 +1,7 @@
 import { makeStyles, TextField } from "@material-ui/core";
 import React, { FunctionComponent } from "react";
 import { connect } from "react-redux";
-import { searchField } from "../redux/actions";
+import { searchField } from "../redux/robots/robotActions";
 import {theme} from "../Layout/Theme"
 
 
@@ -26,7 +26,7 @@ const SearchBox: FunctionComponent<any> = ({ searchField }) => {
       display: "flex",
       justifyContent: "center",
       [theme.breakpoints.down("sm")]:{
-        margin: "30% 6% 20% 6%",
+        margin: "30% 8% 20% 8%",
       }
     },
   });

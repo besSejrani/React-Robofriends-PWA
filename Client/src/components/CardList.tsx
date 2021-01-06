@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { connect } from "react-redux";
-import { IAppState } from "../redux/reducers";
+import { IAppState } from "../redux/rootReducer";
 import { Link } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core";
