@@ -15,7 +15,7 @@ import {
   ListItemText,
   ListItemAvatar,
   Avatar,
-  Paper
+  Paper,
 } from "@material-ui/core";
 
 import { theme } from "../Layout/Theme";
@@ -40,66 +40,65 @@ const RobotDetail: React.FC<any> = ({ getRobot, robot }) => {
   return (
     <Container className={classes.container}>
       <Card className={classes.group}>
-
-      <Card className={classes.root}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            alt="Robo hash api"
-            height="250"
-            image={`https://robohash.org/${robot.id}?size=250x250`}
-            title={robot.name}
+        <Card className={classes.root}>
+          <CardActionArea>
+            <CardMedia
+              component="img"
+              alt="Robo hash api"
+              height="250"
+              image={`https://robohash.org/${robot.id}?size=250x250`}
+              title={robot.name}
             />
-        </CardActionArea>
+          </CardActionArea>
+        </Card>
+
+        <List className={classes.list}>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <PersonIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="Name" secondary={robot.name} />
+          </ListItem>
+
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <FingerPrintIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="Username" secondary={robot.username} />
+          </ListItem>
+
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <EmailIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="Email" secondary={robot.email} />
+          </ListItem>
+
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <PhoneIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="Phone" secondary={robot.phone} />
+          </ListItem>
+
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <WebsiteIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="Website" secondary={robot.website} />
+          </ListItem>
+        </List>
       </Card>
-
-      <List className={classes.list}>
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar>
-              <PersonIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Name" secondary={robot.name} />
-        </ListItem>
-
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar>
-              <FingerPrintIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Username" secondary={robot.username} />
-        </ListItem>
-
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar>
-              <EmailIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Email" secondary={robot.email} />
-        </ListItem>
-
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar>
-              <PhoneIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Phone" secondary={robot.phone} />
-        </ListItem>
-
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar>
-              <WebsiteIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Website" secondary={robot.website} />
-        </ListItem>
-      </List>
-</Card>
     </Container>
   );
 };
@@ -110,16 +109,20 @@ const useStyles = makeStyles({
     justifyContent: "space-evenly",
     alignItems: "center",
     height: "100vh",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+      margin: "25% 0%",
+    },
   },
-  group:{
+  group: {
     display: "flex",
     justifyContent: "space-evenly",
     alignItems: "center",
     width: "70%",
-    [theme.breakpoints.down("sm")]:{
+    [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
-      margin: "10% 0%"
-    }
+      width: "100%",
+    },
   },
   root: {
     width: 300,
