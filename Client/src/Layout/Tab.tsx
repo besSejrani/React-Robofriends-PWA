@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Hidden, Link, BottomNavigation, BottomNavigationAction } from "@material-ui/core";
 
-import { Link as LinkDom } from "react-router-dom";
+import { Link as LinkRouter } from "react-router-dom";
 
 import HomeIcon from "@material-ui/icons/Home";
 import GithubIcon from "@material-ui/icons/GitHub";
@@ -14,17 +14,23 @@ const TabNavigation = () => {
   return (
     <Hidden only={["sm", "md", "lg", "xl"]}>
       <BottomNavigation className={classes.root}>
-        <LinkDom to="/" style={{ width: "100%" }}>
-          <BottomNavigationAction label="Home" icon={<HomeIcon />} style={{ width: "100%" }} />
-        </LinkDom>
+        <BottomNavigationAction component={LinkRouter} to="/" label="Home" icon={<HomeIcon />} />
 
-        <Link href="https://github.com/besSejrani" style={{ width: "100%" }}>
-          <BottomNavigationAction label="Github" icon={<GithubIcon />} style={{ width: "100%" }} />
-        </Link>
+        <BottomNavigationAction
+          component={"a"}
+          href="https://github.com/besSejrani"
+          label="Github"
+          icon={<GithubIcon />}
+          style={{ width: "100%" }}
+        />
 
-        <Link href="https://robohash.org/" style={{ width: "100%" }}>
-          <BottomNavigationAction label="API" icon={<WebIcon />} style={{ width: "100%", justifySelf: "center" }} />
-        </Link>
+        <BottomNavigationAction
+          component={"a"}
+          href="https://robohash.org/"
+          label="API"
+          icon={<WebIcon />}
+          style={{ width: "100%", justifySelf: "center" }}
+        />
       </BottomNavigation>
     </Hidden>
   );
