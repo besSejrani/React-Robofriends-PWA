@@ -14,9 +14,9 @@ const index: React.FC<any> = ({ children }) => {
       <Paper>
         <Header />
         {children}
-        <SideBar />
-        <Tab />
       </Paper>
+      <SideBar />
+      <Tab />
     </>
   );
 };

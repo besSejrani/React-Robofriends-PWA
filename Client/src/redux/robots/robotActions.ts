@@ -4,10 +4,13 @@ import axios from "axios";
 // ========================================================================================================
 
 export const searchField = (text: string) => {
-  return {
-    type: robotType.CHANGE_SEARCH_FIELD,
-    payload: text,
-  };
+  return [
+    {
+      payload: text,
+      type: robotType.CHANGE_SEARCH_FIELD,
+    },
+    { type: robotType.SEARCH_ROBOT },
+  ];
 };
 
 // ========================================================================================================

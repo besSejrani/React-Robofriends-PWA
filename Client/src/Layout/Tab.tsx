@@ -1,8 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Hidden, Link, BottomNavigation, BottomNavigationAction } from "@material-ui/core";
+import { Hidden, BottomNavigation, BottomNavigationAction } from "@material-ui/core";
 
-import { Link as LinkRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import HomeIcon from "@material-ui/icons/Home";
 import GithubIcon from "@material-ui/icons/GitHub";
@@ -14,7 +14,7 @@ const TabNavigation = () => {
   return (
     <Hidden only={["sm", "md", "lg", "xl"]}>
       <BottomNavigation className={classes.root}>
-        <BottomNavigationAction component={LinkRouter} to="/" label="Home" icon={<HomeIcon />} />
+        <BottomNavigationAction component={Link} to="/" label="Home" icon={<HomeIcon />} />
 
         <BottomNavigationAction
           component={"a"}

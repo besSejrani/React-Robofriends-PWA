@@ -1,11 +1,17 @@
 import * as robotType from "./robotType";
 
-const initialState = { robots: [], robot: {} };
+const initialState = { search: "", robots: [], robot: {} };
 
 export default (state = initialState, actions: any) => {
   const { type, payload } = actions;
 
   switch (type) {
+    case robotType.CHANGE_SEARCH_FIELD:
+      return { ...state, search: payload };
+
+    case robotType.SEARCH_ROBOT:
+      return { ...state };
+
     case robotType.GET_ROBOTS:
       return { ...state, robots: payload };
 

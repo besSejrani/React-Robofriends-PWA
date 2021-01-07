@@ -1,23 +1,23 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import { IAppState } from "../redux/rootReducer";
-import { Link } from "react-router-dom";
+import { selectFilterRobots } from "../redux/robots/robotSelector";
 
 import { makeStyles } from "@material-ui/core";
 import MaterialCard from "./MaterialCard";
 
 const CardList: FunctionComponent<any> = () => {
   const classes = useStyles();
-  const searchField = useSelector((state: IAppState) => state.search.search);
-  const robots = useSelector((state: IAppState) => state.robots.robots);
+  const robots = useSelector((state: IAppState) => selectFilterRobots(state));
 
-  const filteredRobots = () => {
-    return robots.filter((robot: any) => robot.name.toLowerCase().includes(searchField.toLowerCase()));
-  };
+  useEffect(() => {
+    cardComponent();
+  }, [robots]);
 
   const cardComponent = () => {
-    return filteredRobots().map((robot: any, i: any) => {
+    return robots.map((robot: any, i: any) => {
       return (
         <Link to={`/friend/${robot.id}`} key={robot.id} style={{ textDecoration: "none" }}>
           <MaterialCard name={robots[i].name} id={robots[i].id} />

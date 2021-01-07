@@ -28,7 +28,7 @@ const Header: React.FC<any> = () => {
 
           <Typography className={classes.title} variant="h6" noWrap>
             <Link to="/" activeStyle={{ color: "white", textDecoration: "none" }}>
-              RoboFriends
+              RoboFriend
             </Link>
           </Typography>
         </Toolbar>

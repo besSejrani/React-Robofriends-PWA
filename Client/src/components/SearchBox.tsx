@@ -10,29 +10,25 @@ const SearchBox: FunctionComponent<any> = () => {
   const theme = useTheme();
 
   return (
-    <div className={classes.container}>
-      <TextField
-        className={classes.root}
-        id="standard-basic"
-        label="Robot Search"
-        onChange={(e) => dispatch(searchField(e.target.value))}
-        margin="normal"
-      />
-    </div>
+    <TextField
+      className={classes.root}
+      id="standard-basic"
+      label="Robot Search"
+      onChange={(e) => dispatch(searchField(e.target.value))}
+      margin="normal"
+    />
   );
 };
 
 export default SearchBox;
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    margin: "10% 12% 10% 12%",
-    [theme.breakpoints.down("sm")]: {
-      margin: "10% 0% 20% 0%",
-    },
-  },
   root: {
     display: "flex",
+    margin: "0% 12% 10% 12%",
     justifyContent: "center",
+    [theme.breakpoints.down("sm")]: {
+      margin: "0% 5% 20% 5%",
+    },
   },
 }));
