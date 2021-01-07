@@ -1,25 +1,33 @@
 import React from "react";
-import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import { Drawer, Button, List, Divider, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import {
+  Drawer,
+  List,
+  Divider,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader,
+  ListItemSecondaryAction,
+  Switch,
+} from "@material-ui/core";
 
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import DarkMode from "@material-ui/icons/Brightness4";
 
-import { connect } from "react-redux";
-import { toggleSideDrawer } from "../redux/ui/uiActions";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleSideDrawer, toggleTheme } from "../redux/ui/uiActions";
 import { IAppState } from "src/redux/rootReducer";
 
 type Anchor = "left";
 
-const SideDrawer: React.FC<any> = ({ isSideDrawerOpen, toggleSideDrawer }) => {
+const SideDrawer: React.FC<any> = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
-  const [state, setState] = React.useState({
-    left: false,
-  });
-
-
+  const isDarkTheme = useSelector((state: IAppState) => state.ui.isDarkTheme);
+  const isSideDrawerOpen = useSelector((state: IAppState) => state.ui.isSideDrawerOpen);
 
   const list = (anchor: Anchor) => (
     <div className={classes.list}>
@@ -34,13 +42,21 @@ const SideDrawer: React.FC<any> = ({ isSideDrawerOpen, toggleSideDrawer }) => {
 
       <Divider />
 
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+      <List subheader={<ListSubheader>Settings</ListSubheader>}>
+        <ListItem>
+          <ListItemIcon>
+            <DarkMode />
+          </ListItemIcon>
+          <ListItemText id="switch-list-label-bluetooth" primary="Dark Mode" />
+          <ListItemSecondaryAction>
+            <Switch
+              checked={isDarkTheme}
+              onChange={() => dispatch(toggleTheme())}
+              edge="end"
+              inputProps={{ "aria-labelledby": "switch-list-label-bluetooth" }}
+            />
+          </ListItemSecondaryAction>
+        </ListItem>
       </List>
     </div>
   );
@@ -49,7 +65,7 @@ const SideDrawer: React.FC<any> = ({ isSideDrawerOpen, toggleSideDrawer }) => {
     <div>
       {(["left"] as Anchor[]).map((anchor) => (
         <React.Fragment key={anchor}>
-          <Drawer anchor={anchor} open={isSideDrawerOpen} onClose={toggleSideDrawer}>
+          <Drawer anchor={anchor} open={isSideDrawerOpen} onClose={() => dispatch(toggleSideDrawer())}>
             {list(anchor)}
           </Drawer>
         </React.Fragment>
@@ -58,13 +74,7 @@ const SideDrawer: React.FC<any> = ({ isSideDrawerOpen, toggleSideDrawer }) => {
   );
 };
 
-const mapState = (state: IAppState) => {
-  return {
-    isSideDrawerOpen: state.ui.isSideDrawerOpen,
-  };
-};
-
-export default connect(mapState, { toggleSideDrawer })(SideDrawer);
+export default SideDrawer;
 
 const useStyles = makeStyles({
   list: {

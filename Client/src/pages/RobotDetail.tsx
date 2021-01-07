@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { IAppState } from "../redux/rootReducer";
 
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getRobot } from "../redux/robots/robotActions";
 import {
   Card,
@@ -15,23 +15,27 @@ import {
   ListItemText,
   ListItemAvatar,
   Avatar,
-  Paper,
 } from "@material-ui/core";
 
-import { theme } from "../Layout/Theme";
+import { useTheme } from "@material-ui/core/styles";
 import PersonIcon from "@material-ui/icons/Person";
 import FingerPrintIcon from "@material-ui/icons/Fingerprint";
 import EmailIcon from "@material-ui/icons/Email";
 import PhoneIcon from "@material-ui/icons/Phone";
 import WebsiteIcon from "@material-ui/icons/Public";
 
-const RobotDetail: React.FC<any> = ({ getRobot, robot }) => {
+const RobotDetail: React.FC<any> = () => {
   const { id } = useParams<{ id: string }>();
   const classes = useStyles();
 
+  const dispatch = useDispatch();
+  const robot = useSelector((state: IAppState) => state.robots.robot);
+
+  const theme = useTheme();
+
   useEffect(() => {
     const fetchData = async (id: string) => {
-      await getRobot(id);
+      await dispatch(getRobot(id));
     };
 
     fetchData(id);
@@ -39,8 +43,8 @@ const RobotDetail: React.FC<any> = ({ getRobot, robot }) => {
 
   return (
     <Container className={classes.container}>
-      <Card className={classes.group}>
-        <Card >
+      <Card className={classes.group} elevation={3}>
+        <Card elevation={3}>
           <CardActionArea>
             <CardMedia
               component="img"
@@ -102,7 +106,7 @@ const RobotDetail: React.FC<any> = ({ getRobot, robot }) => {
   );
 };
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     justifyContent: "space-evenly",
@@ -110,7 +114,7 @@ const useStyles = makeStyles({
     height: "100vh",
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
-      margin: "25% 0%",
+      margin: "5% 0% 15% 0%",
     },
   },
   group: {
@@ -128,12 +132,6 @@ const useStyles = makeStyles({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
-});
+}));
 
-const mapState = (state: IAppState) => {
-  return {
-    robot: state.robots.robot,
-  };
-};
-
-export default connect(mapState, { getRobot })(RobotDetail);
+export default RobotDetail;

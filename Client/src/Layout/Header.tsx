@@ -5,11 +5,12 @@ import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toggleSideDrawer } from "../redux/ui/uiActions";
 
-const Header: React.FC<any> = ({ toggleSideDrawer }) => {
+const Header: React.FC<any> = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   return (
     <div className={classes.root}>
@@ -20,7 +21,7 @@ const Header: React.FC<any> = ({ toggleSideDrawer }) => {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
-            onClick={toggleSideDrawer}
+            onClick={() => dispatch(toggleSideDrawer())}
           >
             <MenuIcon />
           </IconButton>
@@ -36,12 +37,14 @@ const Header: React.FC<any> = ({ toggleSideDrawer }) => {
   );
 };
 
-export default connect(null, { toggleSideDrawer })(Header);
+export default Header;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
+      height: "64px",
+      position: "relative",
     },
     menuButton: {
       marginRight: theme.spacing(2),

@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Card, CardActionArea, CardContent, CardMedia, Typography} from "@material-ui/core";
+import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@material-ui/core";
 
 type MaterialCard = {
   name: string;
@@ -11,10 +11,10 @@ const MaterialCard: React.FC<MaterialCard> = ({ name, id }) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} elevation={3}>
       <CardActionArea>
         <CardMedia
-        className={classes.cardImage}
+          className={classes.cardImage}
           component="img"
           alt="Robo hash api"
           height="250"
@@ -22,7 +22,7 @@ const MaterialCard: React.FC<MaterialCard> = ({ name, id }) => {
           title={name}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2" style={{textAlign: "center"}}>
+          <Typography gutterBottom variant="h5" component="h2" style={{ textAlign: "center" }}>
             {name}
           </Typography>
         </CardContent>
@@ -40,5 +40,5 @@ const useStyles = makeStyles({
   },
   cardImage: {
     height: "auto",
-  }
+  },
 });
