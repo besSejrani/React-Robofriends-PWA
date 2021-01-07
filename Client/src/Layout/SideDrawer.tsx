@@ -12,6 +12,8 @@ import {
   Switch,
 } from "@material-ui/core";
 
+import { Link } from "react-router-dom";
+
 import DarkMode from "@material-ui/icons/Brightness4";
 import HomeIcon from "@material-ui/icons/Home";
 import GithubIcon from "@material-ui/icons/GitHub";
@@ -34,7 +36,7 @@ const SideDrawer: React.FC<any> = () => {
     <div className={classes.list}>
       {
         <List>
-          <ListItem button>
+          <ListItem button component={Link} href="https://github.com/besSejrani">
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
