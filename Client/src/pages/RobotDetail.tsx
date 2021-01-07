@@ -114,7 +114,8 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
-      margin: "5% 0% 15% 0%",
+      padding: "20% 15% 25% 15%",
+      height: "100%",
     },
   },
   group: {

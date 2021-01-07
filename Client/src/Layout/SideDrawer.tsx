@@ -12,9 +12,10 @@ import {
   Switch,
 } from "@material-ui/core";
 
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import DarkMode from "@material-ui/icons/Brightness4";
+import HomeIcon from "@material-ui/icons/Home";
+import GithubIcon from "@material-ui/icons/GitHub";
+import WebIcon from "@material-ui/icons/Public";
 
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSideDrawer, toggleTheme } from "../redux/ui/uiActions";
@@ -31,14 +32,30 @@ const SideDrawer: React.FC<any> = () => {
 
   const list = (anchor: Anchor) => (
     <div className={classes.list}>
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+      {
+        <List>
+          <ListItem button>
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
           </ListItem>
-        ))}
-      </List>
+
+          <ListItem button component={"a"} href="https://github.com/besSejrani">
+            <ListItemIcon>
+              <GithubIcon />
+            </ListItemIcon>
+            <ListItemText primary="Github" />
+          </ListItem>
+
+          <ListItem button component={"a"} href="https://robohash.org/">
+            <ListItemIcon>
+              <WebIcon />
+            </ListItemIcon>
+            <ListItemText primary="RoboHash" />
+          </ListItem>
+        </List>
+      }
 
       <Divider />
 
@@ -58,6 +75,8 @@ const SideDrawer: React.FC<any> = () => {
           </ListItemSecondaryAction>
         </ListItem>
       </List>
+
+      <Divider />
     </div>
   );
 
