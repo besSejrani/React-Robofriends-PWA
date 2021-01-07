@@ -36,7 +36,7 @@ const SideDrawer: React.FC<any> = () => {
     <div className={classes.list}>
       {
         <List>
-          <ListItem button component={Link} href="https://github.com/besSejrani">
+          <ListItem button component={Link} to="/">
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
