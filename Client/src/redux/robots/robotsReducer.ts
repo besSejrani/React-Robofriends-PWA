@@ -9,9 +9,6 @@ export default (state = initialState, actions: any) => {
     case robotType.CHANGE_SEARCH_FIELD:
       return { ...state, search: payload };
 
-    case robotType.SEARCH_ROBOT:
-      return { ...state };
-
     case robotType.GET_ROBOTS:
       return { ...state, robots: payload };
 

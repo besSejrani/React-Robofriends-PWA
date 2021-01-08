@@ -2,7 +2,6 @@ import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "./rootReducer";
 
 import thunk from "redux-thunk";
-import reduxMulti from "redux-multi";
 //import reduxSaga from "redux-saga";
 //import rootSaga from "./rootSagas";
 import { persistStore } from "redux-persist";
@@ -41,10 +40,7 @@ if (process.env.NODE_ENV !== "production") {
 | in the root
 |--------------------------------------------------
 */
-export const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(/* sagaMiddleware, */ thunk, reduxMulti))
-);
+export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(/* sagaMiddleware, */ thunk)));
 
 export const persistor = persistStore(store);
 /**
