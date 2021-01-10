@@ -33,9 +33,9 @@ const SideDrawer: React.FC<any> = () => {
   let defferedPrompt;
   useEffect(() => {
     window.addEventListener("beforeinstallprompt", (event) => {
-      console.log(event);
       event.preventDefault();
       defferedPrompt = event;
+      console.log(defferedPrompt);
       setInstallable(true);
     });
 
