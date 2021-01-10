@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Drawer,
@@ -25,18 +25,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleSideDrawer, toggleTheme } from "../redux/ui/uiActions";
 import { IAppState } from "src/redux/rootReducer";
 
-type Anchor = "left";
+//type Anchor = "left";
 
-const SideDrawer: React.FC<any> = () => {
+const SideDrawer = () => {
   const [installable, setInstallable] = useState(false);
 
-  let defferedPrompt;
+  let defferedPrompt = useRef(null);
 
   useEffect(() => {
     window.addEventListener("beforeinstallprompt", (event) => {
       event.preventDefault();
-      defferedPrompt = event;
-      console.log(defferedPrompt);
+      defferedPrompt.current = event;
+      console.log("bla", defferedPrompt);
       setInstallable(true);
     });
 
@@ -46,8 +46,6 @@ const SideDrawer: React.FC<any> = () => {
   }, [installable]);
 
   const handleInstallClick = () => {
-    console.log(defferedPrompt);
-
     if (defferedPrompt) {
       defferedPrompt.prompt();
 
@@ -69,10 +67,10 @@ const SideDrawer: React.FC<any> = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const isDarkTheme = useSelector((state: IAppState) => state.ui.isDarkTheme);
-  const isSideDrawerOpen = useSelector((state: IAppState) => state.ui.isSideDrawerOpen);
+  const isDarkTheme = useSelector((state) => state.ui.isDarkTheme);
+  const isSideDrawerOpen = useSelector((state) => state.ui.isSideDrawerOpen);
 
-  const list = (anchor: Anchor) => (
+  const list = (anchor) => (
     <div className={classes.list}>
       {
         <List>
@@ -134,7 +132,7 @@ const SideDrawer: React.FC<any> = () => {
 
   return (
     <div>
-      {(["left"] as Anchor[]).map((anchor) => (
+      {["left"].map((anchor) => (
         <React.Fragment key={anchor}>
           <Drawer anchor={anchor} open={isSideDrawerOpen} onClose={() => dispatch(toggleSideDrawer())}>
             {list(anchor)}
