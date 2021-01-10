@@ -25,18 +25,17 @@ import { toggleSideDrawer, toggleTheme } from "../redux/ui/uiActions";
 import { IAppState } from "src/redux/rootReducer";
 
 type Anchor = "left";
+let defferedPrompt: any;
 
 const SideDrawer: React.FC<any> = () => {
   const [installable, setInstallable] = useState(false);
-
-  let deferredPrompt;
 
   useEffect(() => {
     window.addEventListener("beforeinstallprompt", (e) => {
       // Prevent the mini-infobar from appearing on mobile
       e.preventDefault();
       // Stash the event so it can be triggered later.
-      deferredPrompt = e;
+      defferedPrompt = e;
       // Update UI notify the user they can install the PWA
       setInstallable(true);
     });
@@ -48,17 +47,22 @@ const SideDrawer: React.FC<any> = () => {
   }, []);
 
   const handleInstallClick = (e) => {
+    console.log(e);
+
     // Hide the app provided install promotion
     setInstallable(false);
     // Show the install prompt
-    deferredPrompt.prompt();
+    defferedPrompt.prompt();
     // Wait for the user to respond to the prompt
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === "accepted") {
-        console.log("User accepted the install prompt");
+    defferedPrompt.userChoice.then((choiceResult) => {
+      console.log(choiceResult.outcome);
+
+      if (choiceResult.outcome === "dismissed") {
+        console.log("user cancelled installation");
       } else {
-        console.log("User dismissed the install prompt");
+        console.log("user added to homescreen");
       }
+      defferedPrompt = null;
     });
   };
 
