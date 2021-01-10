@@ -53,10 +53,9 @@ const SideDrawer: React.FC<any> = () => {
           console.log("user cancelled installation");
         } else {
           console.log("user added to homescreen");
+          defferedPrompt.current = null;
+          setInstallable(false);
         }
-
-        defferedPrompt.current = null;
-        setInstallable(false);
       });
     }
   };
