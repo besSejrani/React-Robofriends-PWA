@@ -31,6 +31,7 @@ composeEnhancers =
     ? (composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose)
     : (composeEnhancers = null || compose);
 
+console.log(process.env.NODE_ENV);
 /**
 |--------------------------------------------------
 | EXPLANATION :
