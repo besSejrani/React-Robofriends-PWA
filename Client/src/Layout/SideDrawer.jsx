@@ -47,9 +47,9 @@ const SideDrawer = () => {
 
   const handleInstallClick = () => {
     if (defferedPrompt) {
-      defferedPrompt.prompt();
+      defferedPrompt.current.prompt();
 
-      defferedPrompt.userChoice.then((choiceResult) => {
+      defferedPrompt.current.userChoice.then((choiceResult) => {
         console.log(choiceResult.outcome);
 
         if (choiceResult.outcome === "dismissed") {
