@@ -25,18 +25,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleSideDrawer, toggleTheme } from "../redux/ui/uiActions";
 import { IAppState } from "src/redux/rootReducer";
 
-//type Anchor = "left";
+type Anchor = "left";
 
-const SideDrawer = () => {
+const SideDrawer: React.FC<any> = () => {
   const [installable, setInstallable] = useState(false);
 
-  let defferedPrompt = useRef(null);
+  let defferedPrompt: any = useRef(null);
 
   useEffect(() => {
     window.addEventListener("beforeinstallprompt", (event) => {
       event.preventDefault();
       defferedPrompt.current = event;
-      console.log("bla", defferedPrompt.current);
+      console.log(defferedPrompt);
       setInstallable(true);
     });
 
@@ -46,7 +46,10 @@ const SideDrawer = () => {
   }, [installable]);
 
   const handleInstallClick = () => {
+    console.log(defferedPrompt);
+
     if (defferedPrompt) {
+      //ts-ignore
       defferedPrompt.current.prompt();
 
       defferedPrompt.current.userChoice.then((choiceResult) => {
@@ -58,7 +61,7 @@ const SideDrawer = () => {
           console.log("user added to homescreen");
         }
 
-        defferedPrompt = null;
+        defferedPrompt.current = null;
         setInstallable(false);
       });
     }
@@ -67,10 +70,10 @@ const SideDrawer = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const isDarkTheme = useSelector((state) => state.ui.isDarkTheme);
-  const isSideDrawerOpen = useSelector((state) => state.ui.isSideDrawerOpen);
+  const isDarkTheme = useSelector((state: IAppState) => state.ui.isDarkTheme);
+  const isSideDrawerOpen = useSelector((state: IAppState) => state.ui.isSideDrawerOpen);
 
-  const list = (anchor) => (
+  const list = (anchor: Anchor) => (
     <div className={classes.list}>
       {
         <List>
@@ -115,15 +118,21 @@ const SideDrawer = () => {
           </ListItemSecondaryAction>
         </ListItem>
 
-        <ListItem>
-          <ListItemIcon>
-            <InstallIcon />
-          </ListItemIcon>
-          <ListItemText id="switch-list-label-bluetooth" primary="Install PWA" />
-          <ListItemSecondaryAction>
-            <Button onClick={handleInstallClick}>click</Button>
-          </ListItemSecondaryAction>
-        </ListItem>
+        {installable && (
+          <ListItem>
+            <ListItemIcon>
+              <InstallIcon />
+            </ListItemIcon>
+            <ListItemText id="switch-list-label-bluetooth" primary="Install PWA" />
+            <ListItemSecondaryAction>
+              <Switch
+                onChange={handleInstallClick}
+                edge="end"
+                inputProps={{ "aria-labelledby": "switch-list-label-bluetooth" }}
+              />
+            </ListItemSecondaryAction>
+          </ListItem>
+        )}
       </List>
 
       <Divider />
@@ -132,7 +141,7 @@ const SideDrawer = () => {
 
   return (
     <div>
-      {["left"].map((anchor) => (
+      {(["left"] as Anchor[]).map((anchor) => (
         <React.Fragment key={anchor}>
           <Drawer anchor={anchor} open={isSideDrawerOpen} onClose={() => dispatch(toggleSideDrawer())}>
             {list(anchor)}
