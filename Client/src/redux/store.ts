@@ -18,18 +18,18 @@ import * as process from "process";
 |--------------------------------------------------
 */
 
-/* declare global {
+declare global {
   interface Window {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
   }
 }
- */
+
 let composeEnhancers;
 
-if (process.env.NODE_ENV !== "production") {
-  composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-} else {
+if (process.env.NODE_ENV === "production") {
   composeEnhancers = null || compose;
+} else {
+  composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 }
 
 /**
