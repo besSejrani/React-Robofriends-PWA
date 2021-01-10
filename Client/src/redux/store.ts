@@ -26,10 +26,11 @@ declare global {
 
 let composeEnhancers;
 
-composeEnhancers =
-  process.env.NODE_ENV !== "development"
-    ? (composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose)
-    : (composeEnhancers = null || compose);
+if (process.env.NODE_ENV !== "production") {
+  composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+} else {
+  composeEnhancers = null || compose;
+}
 
 /**
 |--------------------------------------------------
