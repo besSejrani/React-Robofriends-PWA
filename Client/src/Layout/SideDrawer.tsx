@@ -49,8 +49,6 @@ const SideDrawer: React.FC<any> = () => {
       defferedPrompt.current.prompt();
 
       defferedPrompt.current.userChoice.then((choiceResult) => {
-        console.log(choiceResult.outcome);
-
         if (choiceResult.outcome === "dismissed") {
           console.log("user cancelled installation");
         } else {
