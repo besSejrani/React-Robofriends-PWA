@@ -36,7 +36,6 @@ const SideDrawer: React.FC<any> = () => {
     window.addEventListener("beforeinstallprompt", (event) => {
       event.preventDefault();
       defferedPrompt.current = event;
-      console.log(defferedPrompt);
       setInstallable(true);
     });
 
@@ -46,10 +45,7 @@ const SideDrawer: React.FC<any> = () => {
   }, [installable]);
 
   const handleInstallClick = () => {
-    console.log(defferedPrompt);
-
     if (defferedPrompt) {
-      //ts-ignore
       defferedPrompt.current.prompt();
 
       defferedPrompt.current.userChoice.then((choiceResult) => {
