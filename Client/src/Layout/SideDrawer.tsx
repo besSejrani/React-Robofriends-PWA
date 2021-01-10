@@ -10,6 +10,7 @@ import {
   ListSubheader,
   ListItemSecondaryAction,
   Switch,
+  Button,
 } from "@material-ui/core";
 
 import { Link } from "react-router-dom";
@@ -25,45 +26,41 @@ import { toggleSideDrawer, toggleTheme } from "../redux/ui/uiActions";
 import { IAppState } from "src/redux/rootReducer";
 
 type Anchor = "left";
-let defferedPrompt: any;
 
 const SideDrawer: React.FC<any> = () => {
   const [installable, setInstallable] = useState(false);
 
+  let defferedPrompt;
   useEffect(() => {
-    window.addEventListener("beforeinstallprompt", (e) => {
-      // Prevent the mini-infobar from appearing on mobile
-      e.preventDefault();
-      // Stash the event so it can be triggered later.
-      defferedPrompt = e;
-      // Update UI notify the user they can install the PWA
+    window.addEventListener("beforeinstallprompt", (event) => {
+      console.log(event);
+      event.preventDefault();
+      defferedPrompt = event;
       setInstallable(true);
     });
 
     window.addEventListener("appinstalled", () => {
-      // Log install to analytics
       console.log("INSTALL: Success");
     });
   }, []);
 
   const handleInstallClick = (e) => {
-    console.log(e);
+    if (defferedPrompt) {
+      defferedPrompt.prompt();
 
-    // Hide the app provided install promotion
-    setInstallable(false);
-    // Show the install prompt
-    defferedPrompt.prompt();
-    // Wait for the user to respond to the prompt
-    defferedPrompt.userChoice.then((choiceResult) => {
-      console.log(choiceResult.outcome);
+      defferedPrompt.userChoice.then((choiceResult) => {
+        console.log(choiceResult.outcome);
 
-      if (choiceResult.outcome === "dismissed") {
-        console.log("user cancelled installation");
-      } else {
-        console.log("user added to homescreen");
-      }
-      defferedPrompt = null;
-    });
+        if (choiceResult.outcome === "dismissed") {
+          console.log("user cancelled installation");
+        } else {
+          console.log("user added to homescreen");
+        }
+
+        defferedPrompt = null;
+        setInstallable(false);
+      });
+    }
   };
 
   const classes = useStyles();
@@ -116,17 +113,14 @@ const SideDrawer: React.FC<any> = () => {
             />
           </ListItemSecondaryAction>
         </ListItem>
+
         <ListItem>
           <ListItemIcon>
             <InstallIcon />
           </ListItemIcon>
           <ListItemText id="switch-list-label-bluetooth" primary="Install PWA" />
           <ListItemSecondaryAction>
-            <Switch
-              onChange={(e) => handleInstallClick(e)}
-              edge="end"
-              inputProps={{ "aria-labelledby": "switch-list-label-bluetooth" }}
-            />
+            <Button onClick={handleInstallClick}>click</Button>
           </ListItemSecondaryAction>
         </ListItem>
       </List>
