@@ -112,22 +112,19 @@ const SideDrawer: React.FC<any> = () => {
             />
           </ListItemSecondaryAction>
         </ListItem>
-
-        {installable && (
-          <ListItem>
-            <ListItemIcon>
-              <InstallIcon />
-            </ListItemIcon>
-            <ListItemText id="switch-list-label-bluetooth" primary="Install PWA" />
-            <ListItemSecondaryAction>
-              <Switch
-                onChange={handleInstallClick}
-                edge="end"
-                inputProps={{ "aria-labelledby": "switch-list-label-bluetooth" }}
-              />
-            </ListItemSecondaryAction>
-          </ListItem>
-        )}
+        <ListItem>
+          <ListItemIcon>
+            <InstallIcon />
+          </ListItemIcon>
+          <ListItemText id="switch-list-label-bluetooth" primary="Install PWA" />
+          <ListItemSecondaryAction>
+            <Switch
+              onChange={(e) => handleInstallClick(e)}
+              edge="end"
+              inputProps={{ "aria-labelledby": "switch-list-label-bluetooth" }}
+            />
+          </ListItemSecondaryAction>
+        </ListItem>
       </List>
 
       <Divider />

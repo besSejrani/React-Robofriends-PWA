@@ -1,5 +1,5 @@
 {
-  "app_name": "RoboFriend",
+  "name": "RoboFriend",
   "short_name": "RoboFriend",
   "start_url": "/",
   "scope": "/",
