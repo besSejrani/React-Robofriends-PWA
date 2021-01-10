@@ -36,7 +36,7 @@ const SideDrawer = () => {
     window.addEventListener("beforeinstallprompt", (event) => {
       event.preventDefault();
       defferedPrompt.current = event;
-      console.log("bla", defferedPrompt);
+      console.log("bla", defferedPrompt.current);
       setInstallable(true);
     });
 
