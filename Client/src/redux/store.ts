@@ -27,12 +27,10 @@ declare global {
 let composeEnhancers;
 
 composeEnhancers =
-  process.env.NODE_ENV !== "production"
-    ? (composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose)
-    : (composeEnhancers = null || compose);
+  process.env.NODE_ENV === "production"
+    ? (composeEnhancers = null || compose)
+    : (composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose);
 
-console.log(process.env.REACT_APP_NODE_ENV);
-console.log(process.env.NODE_ENV);
 /**
 |--------------------------------------------------
 | EXPLANATION :
