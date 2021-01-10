@@ -43,7 +43,7 @@ const SideDrawer: React.FC<any> = () => {
     window.addEventListener("appinstalled", () => {
       console.log("INSTALL: Success");
     });
-  }, []);
+  }, [installable]);
 
   const handleInstallClick = () => {
     console.log(defferedPrompt);
