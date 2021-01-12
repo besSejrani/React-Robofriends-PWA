@@ -31,8 +31,6 @@ const RobotDetail: React.FC<any> = () => {
   const dispatch = useDispatch();
   const robot = useSelector((state: IAppState) => state.robots.robot);
 
-  const theme = useTheme();
-
   useEffect(() => {
     const fetchData = async (id: string) => {
       await dispatch(getRobot(id));

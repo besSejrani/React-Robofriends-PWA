@@ -8,7 +8,7 @@ import Tab from "./Tab";
 type Nav = {
   children: JSX.Element[] | JSX.Element;
 };
-const index: React.FC<any> = ({ children }) => {
+const index: React.FC<Nav> = ({ children }) => {
   return (
     <>
       <Paper>

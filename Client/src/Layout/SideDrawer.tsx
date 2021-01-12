@@ -10,12 +10,12 @@ import {
   ListSubheader,
   ListItemSecondaryAction,
   Switch,
-  Button,
 } from "@material-ui/core";
 
 import { Link } from "react-router-dom";
 
-import DarkMode from "@material-ui/icons/Brightness4";
+import LightMode from "@material-ui/icons/Brightness4";
+import DarkMode from "@material-ui/icons/BrightnessHigh";
 import HomeIcon from "@material-ui/icons/Home";
 import GithubIcon from "@material-ui/icons/GitHub";
 import WebIcon from "@material-ui/icons/Public";
@@ -29,8 +29,13 @@ type Anchor = "left";
 
 const SideDrawer: React.FC<any> = () => {
   const [installable, setInstallable] = useState(false);
-
   let defferedPrompt: any = useRef(null);
+
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const isDarkTheme = useSelector((state: IAppState) => state.ui.isDarkTheme);
+  const isSideDrawerOpen = useSelector((state: IAppState) => state.ui.isSideDrawerOpen);
 
   useEffect(() => {
     window.addEventListener("beforeinstallprompt", (event) => {
@@ -59,12 +64,6 @@ const SideDrawer: React.FC<any> = () => {
       });
     }
   };
-
-  const classes = useStyles();
-  const dispatch = useDispatch();
-
-  const isDarkTheme = useSelector((state: IAppState) => state.ui.isDarkTheme);
-  const isSideDrawerOpen = useSelector((state: IAppState) => state.ui.isSideDrawerOpen);
 
   const list = (anchor: Anchor) => (
     <div className={classes.list}>
@@ -97,9 +96,7 @@ const SideDrawer: React.FC<any> = () => {
 
       <List subheader={<ListSubheader>Settings</ListSubheader>}>
         <ListItem>
-          <ListItemIcon>
-            <DarkMode />
-          </ListItemIcon>
+          <ListItemIcon>{isDarkTheme ? <DarkMode /> : <LightMode />}</ListItemIcon>
           <ListItemText id="switch-list-label-bluetooth" primary="Dark Mode" />
           <ListItemSecondaryAction>
             <Switch
