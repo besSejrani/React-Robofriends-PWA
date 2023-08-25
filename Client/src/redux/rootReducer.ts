@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import robotsReducer from "./robots/robotsReducer";
-import uiReducer from "./ui/uiReducers";
+import robotsReducer from "@Redux/robots/robotsReducer";
+import uiReducer from "@Redux/ui/uiReducers";
 
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";

@@ -1,29 +1,35 @@
 import React, { useState, useEffect, useRef } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import {
-  Drawer,
-  List,
-  Divider,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  ListSubheader,
-  ListItemSecondaryAction,
-  Switch,
-} from "@material-ui/core";
 
+// React DOM
 import { Link } from "react-router-dom";
 
-// import LightMode from "@material-ui/icons/Brightness4";
-// import DarkMode from "@material-ui/icons/BrightnessHigh";
-// import HomeIcon from "@material-ui/icons/Home";
-// import GithubIcon from "@material-ui/icons/GitHub";
-// import WebIcon from "@material-ui/icons/Public";
-// import InstallIcon from "@material-ui/icons/GetApp";
-
+// Redux
 import { useDispatch, useSelector } from "react-redux";
-import { toggleSideDrawer, toggleTheme } from "../redux/ui/uiActions";
-import { IAppState } from "src/redux/rootReducer";
+import { toggleSideDrawer, toggleTheme } from "../Redux/ui/uiActions";
+import { IAppState } from "@Redux/rootReducer";
+
+// Material UI
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/BottomNavigationAction";
+import ListItemText from "@mui/material/ListItemText";
+import ListSubheader from "@mui/material/ListSubheader";
+import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
+import Switch from "@mui/material/Switch";
+
+// Material Styles
+import { makeStyles } from "@mui/styles";
+
+import LightMode from "@mui/icons-material/Brightness4";
+import DarkMode from "@mui/icons-material/BrightnessHigh";
+import HomeIcon from "@mui/icons-material/Home";
+import GithubIcon from "@mui/icons-material/GitHub";
+import WebIcon from "@mui/icons-material/Public";
+import InstallIcon from "@mui/icons-material/GetApp";
+
+// ======================================================================================
 
 type Anchor = "left";
 
@@ -68,19 +74,20 @@ const SideDrawer: React.FC<any> = () => {
   const list = (anchor: Anchor) => (
     <div className={classes.list}>
       {
-        <List>
-          <ListItem button component={Link} to="/">
-            <ListItemIcon>{/* <HomeIcon /> */}</ListItemIcon>
+        <List subheader={<ListSubheader>Links</ListSubheader>}>
+          <ListItem component={Link} to="/">
+            <HomeIcon color="action" />
+
             <ListItemText primary="Home" />
           </ListItem>
 
-          <ListItem button component={"a"} href="https://github.com/besSejrani">
-            <ListItemIcon>{/* <GithubIcon /> */}</ListItemIcon>
+          <ListItem component={"a"} href="https://github.com/besSejrani">
+            <GithubIcon color="action" />
             <ListItemText primary="Github" />
           </ListItem>
 
-          <ListItem button component={"a"} href="https://robohash.org/">
-            <ListItemIcon>{/* <WebIcon /> */}</ListItemIcon>
+          <ListItem component={"a"} href="https://robohash.org/">
+            <WebIcon color="action" />
             <ListItemText primary="RoboHash" />
           </ListItem>
         </List>
@@ -90,7 +97,7 @@ const SideDrawer: React.FC<any> = () => {
 
       <List subheader={<ListSubheader>Settings</ListSubheader>}>
         <ListItem>
-          <ListItemIcon>{/* {isDarkTheme ? <DarkMode /> : <LightMode />} */}</ListItemIcon>
+          {isDarkTheme ? <DarkMode color="action" /> : <LightMode color="action" />}
           <ListItemText id="switch-list-label-bluetooth" primary="Dark Mode" />
           <ListItemSecondaryAction>
             <Switch
@@ -104,7 +111,7 @@ const SideDrawer: React.FC<any> = () => {
 
         {installable && (
           <ListItem>
-            <ListItemIcon>{/* <InstallIcon /> */}</ListItemIcon>
+            <InstallIcon color="action" />
             <ListItemText id="switch-list-label-bluetooth" primary="Install PWA" />
             <ListItemSecondaryAction>
               <Switch
@@ -135,6 +142,8 @@ const SideDrawer: React.FC<any> = () => {
 };
 
 export default SideDrawer;
+
+// ======================================================================================
 
 const useStyles = makeStyles({
   list: {

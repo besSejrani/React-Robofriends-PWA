@@ -1,28 +1,34 @@
 import React, { useEffect } from "react";
+
+// React DOM
 import { useParams } from "react-router-dom";
-import { IAppState } from "../redux/rootReducer";
 
+// Redux
 import { useDispatch, useSelector } from "react-redux";
-import { getRobot } from "../redux/robots/robotActions";
-import {
-  Card,
-  CardActionArea,
-  CardMedia,
-  makeStyles,
-  Container,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemAvatar,
-  Avatar,
-} from "@material-ui/core";
+import { IAppState } from "@Redux/rootReducer";
+import { getRobot } from "@Redux/robots/robotActions";
 
-import { useTheme } from "@material-ui/core/styles";
+// Material UI
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import CardMedia from "@mui/material/CardMedia";
+import Container from "@mui/material/Container";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+
+// Material Styles
+import { makeStyles } from "@mui/styles";
+
 // import PersonIcon from "@material-ui/icons/Person";
 // import FingerPrintIcon from "@material-ui/icons/Fingerprint";
 // import EmailIcon from "@material-ui/icons/Email";
 // import PhoneIcon from "@material-ui/icons/Phone";
 // import WebsiteIcon from "@material-ui/icons/Public";
+
+// ======================================================================================
 
 const RobotDetail: React.FC<any> = () => {
   const { id } = useParams<{ id: string }>();
@@ -33,6 +39,7 @@ const RobotDetail: React.FC<any> = () => {
 
   useEffect(() => {
     const fetchData = async (id: string) => {
+      //@ts-ignore
       await dispatch(getRobot(id));
     };
 
@@ -94,32 +101,34 @@ const RobotDetail: React.FC<any> = () => {
   );
 };
 
+// ======================================================================================
+
 const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     justifyContent: "space-evenly",
     alignItems: "center",
     height: "100vh",
-    [theme.breakpoints.down("sm")]: {
-      flexDirection: "column",
-      padding: "20% 15% 25% 15%",
-      height: "100%",
-    },
+    // [theme.breakpoints.down("sm")]: {
+    //   flexDirection: "column",
+    //   padding: "20% 15% 25% 15%",
+    //   height: "100%",
+    // },
   },
   group: {
     display: "flex",
     justifyContent: "space-evenly",
     alignItems: "center",
     width: "70%",
-    [theme.breakpoints.down("sm")]: {
-      flexDirection: "column",
-      width: "100%",
-    },
+    // [theme.breakpoints.down("sm")]: {
+    //   flexDirection: "column",
+    //   width: "100%",
+    // },
   },
   list: {
     width: "100%",
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    // backgroundColor: theme.palette.background.paper,
   },
 }));
 

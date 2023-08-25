@@ -1,22 +1,25 @@
 import React, { useEffect, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { CircularProgress } from "@material-ui/core";
+
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { useDispatch } from "react-redux";
-import { getRobots } from "../redux/robots/robotActions";
+import { getRobots } from "../Redux/robots/robotActions";
 
 // Normal import
 import Layout from "../Layout/index";
-import MainPage from "../pages/MainPage";
+import MainPage from "../Pages/MainPage";
+import { AnyAction } from "redux";
 
 // Lazy loading
-const RobotDetail = lazy(() => import("../pages/RobotDetail"));
+const RobotDetail = lazy(() => import("../Pages/RobotDetail"));
 
-const App: React.FC<any> = () => {
+const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
+      //@ts-ignore
       await dispatch(getRobots());
     };
 

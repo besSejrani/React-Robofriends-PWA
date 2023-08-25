@@ -1,12 +1,18 @@
 import React, { FunctionComponent, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+// Redux
 import { useSelector } from "react-redux";
-import { IAppState } from "../redux/rootReducer";
-import { selectFilterRobots } from "../redux/robots/robotSelector";
+import { IAppState } from "@Redux/rootReducer";
+import { selectFilterRobots } from "@Redux/robots/robotSelector";
 
-import { makeStyles } from "@material-ui/core";
-import MaterialCard from "./MaterialCard";
+// Components
+import MaterialCard from "@Components/MaterialCard";
+
+// Material Styles
+import { makeStyles } from "@mui/styles";
+
+// ======================================================================================
 
 const CardList: FunctionComponent<any> = () => {
   const classes = useStyles();
@@ -28,6 +34,8 @@ const CardList: FunctionComponent<any> = () => {
 
   return <div className={classes.root}>{cardComponent()}</div>;
 };
+
+// ======================================================================================
 
 const useStyles = makeStyles({
   root: {

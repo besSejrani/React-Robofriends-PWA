@@ -1,9 +1,17 @@
 import React from "react";
-import Header from "./Header";
-import { Paper } from "@material-ui/core";
+
+// Layout
+import Header from "@Layout/Header";
+import SideBar from "@Layout/SideDrawer";
+import Tab from "@Layout/Tab";
+
+// Material UI
+import Paper from "@mui/material/Paper";
+
+// Material Theme
 import { withTheme as WithTheme } from "./Theme";
-import SideBar from "./SideDrawer";
-import Tab from "./Tab";
+
+// ======================================================================================
 
 type Nav = {
   children: JSX.Element[] | JSX.Element;

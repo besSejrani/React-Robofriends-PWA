@@ -1,31 +1,31 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Hidden, BottomNavigation, BottomNavigationAction } from "@material-ui/core";
-
+// React DOM
 import { Link } from "react-router-dom";
 
-// import HomeIcon from "@material-ui/icons/Home";
-// import GithubIcon from "@material-ui/icons/GitHub";
-// import WebIcon from "@material-ui/icons/Public";
+// Material UI
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+
+// Material Styles
+import { makeStyles } from "@mui/styles";
+
+import HomeIcon from "@mui/icons-material/Home";
+import GithubIcon from "@mui/icons-material/GitHub";
+import WebIcon from "@mui/icons-material/Public";
+
+// ======================================================================================
 
 const TabNavigation = () => {
   const classes = useStyles();
 
   return (
-    // <Hidden only={["sm", "md", "lg", "xl"]}>
     <BottomNavigation className={classes.root}>
-      <BottomNavigationAction
-        component={Link}
-        to="/"
-        label="Home"
-        // icon={<HomeIcon />}
-      />
+      <BottomNavigationAction component={Link} to="/" label="Home" icon={<HomeIcon />} />
 
       <BottomNavigationAction
         component={"a"}
         href="https://github.com/besSejrani"
         label="Github"
-        // icon={<GithubIcon />}
+        icon={<GithubIcon />}
         style={{ width: "100%" }}
       />
 
@@ -33,15 +33,16 @@ const TabNavigation = () => {
         component={"a"}
         href="https://robohash.org/"
         label="API"
-        // icon={<WebIcon />}
+        icon={<WebIcon />}
         style={{ width: "100%", justifySelf: "center" }}
       />
     </BottomNavigation>
-    // </Hidden>
   );
 };
 
 export default TabNavigation;
+
+// ======================================================================================
 
 const useStyles = makeStyles({
   root: {

@@ -1,12 +1,25 @@
 import React from "react";
+
+// React DOM
 import { NavLink as Link } from "react-router-dom";
 
-import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
-// import MenuIcon from "@material-ui/icons/Menu";
-
+// Redux
 import { useDispatch } from "react-redux";
-import { toggleSideDrawer } from "../redux/ui/uiActions";
+import { toggleSideDrawer } from "../Redux/ui/uiActions";
+
+// Material UI
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+
+// Material Styles
+import { makeStyles } from "@mui/styles";
+
+// Icons
+import MenuIcon from "@mui/icons-material/Menu";
+
+// ======================================================================================
 
 const Header: React.FC<any> = () => {
   const classes = useStyles();
@@ -23,7 +36,7 @@ const Header: React.FC<any> = () => {
             aria-label="open drawer"
             onClick={() => dispatch(toggleSideDrawer())}
           >
-            {/* <MenuIcon /> */}
+            <MenuIcon />
           </IconButton>
 
           <Typography className={classes.title} variant="h6" noWrap>
@@ -39,24 +52,24 @@ const Header: React.FC<any> = () => {
 
 export default Header;
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-      height: "64px",
-      position: "relative",
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-      color: "white",
-      [theme.breakpoints.up("sm")]: {
-        display: "block",
-      },
-      alignItems: "center",
-      justifyContent: "center",
-    },
-  }),
-);
+// ======================================================================================
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    height: "64px",
+    position: "relative",
+  },
+  menuButton: {
+    // marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+    color: "white",
+    // [theme.breakpoints.up("sm")]: {
+    //   display: "block",
+    // },
+    alignItems: "center",
+    justifyContent: "center",
+  },
+}));

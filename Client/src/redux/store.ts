@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from "redux";
-import rootReducer from "./rootReducer";
+import rootReducer from "@Redux/rootReducer";
 
 import thunk from "redux-thunk";
 //import reduxSaga from "redux-saga";

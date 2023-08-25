@@ -1,4 +1,4 @@
-import * as uiTypes from "./uiTypes";
+import * as uiTypes from "@Redux/ui/uiTypes";
 
 // ========================================================================================================
 

@@ -1,4 +1,4 @@
-import * as robotType from "./robotType";
+import * as robotType from "@Redux/robots/robotType";
 import axios from "axios";
 
 // ========================================================================================================
