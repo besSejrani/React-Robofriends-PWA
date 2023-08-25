@@ -1,13 +1,14 @@
-FROM node:15.5-alpine3.10 as builder
+FROM node:20-alpine3.17
 
 WORKDIR /app
 
-COPY package*.json .
+COPY package*.json ./
 
-RUN npm install && npm cache clean --force
+RUN npm install
 
 COPY . .
 
 EXPOSE 3000
 
 CMD ["npm", "run", "start"]
+

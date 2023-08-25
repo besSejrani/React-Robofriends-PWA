@@ -3,7 +3,7 @@ import { NavLink as Link } from "react-router-dom";
 
 import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import MenuIcon from "@material-ui/icons/Menu";
+// import MenuIcon from "@material-ui/icons/Menu";
 
 import { useDispatch } from "react-redux";
 import { toggleSideDrawer } from "../redux/ui/uiActions";
@@ -23,7 +23,7 @@ const Header: React.FC<any> = () => {
             aria-label="open drawer"
             onClick={() => dispatch(toggleSideDrawer())}
           >
-            <MenuIcon />
+            {/* <MenuIcon /> */}
           </IconButton>
 
           <Typography className={classes.title} variant="h6" noWrap>
@@ -58,5 +58,5 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
       justifyContent: "center",
     },
-  })
+  }),
 );

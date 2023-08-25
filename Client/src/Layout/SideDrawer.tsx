@@ -14,12 +14,12 @@ import {
 
 import { Link } from "react-router-dom";
 
-import LightMode from "@material-ui/icons/Brightness4";
-import DarkMode from "@material-ui/icons/BrightnessHigh";
-import HomeIcon from "@material-ui/icons/Home";
-import GithubIcon from "@material-ui/icons/GitHub";
-import WebIcon from "@material-ui/icons/Public";
-import InstallIcon from "@material-ui/icons/GetApp";
+// import LightMode from "@material-ui/icons/Brightness4";
+// import DarkMode from "@material-ui/icons/BrightnessHigh";
+// import HomeIcon from "@material-ui/icons/Home";
+// import GithubIcon from "@material-ui/icons/GitHub";
+// import WebIcon from "@material-ui/icons/Public";
+// import InstallIcon from "@material-ui/icons/GetApp";
 
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSideDrawer, toggleTheme } from "../redux/ui/uiActions";
@@ -70,23 +70,17 @@ const SideDrawer: React.FC<any> = () => {
       {
         <List>
           <ListItem button component={Link} to="/">
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
+            <ListItemIcon>{/* <HomeIcon /> */}</ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
 
           <ListItem button component={"a"} href="https://github.com/besSejrani">
-            <ListItemIcon>
-              <GithubIcon />
-            </ListItemIcon>
+            <ListItemIcon>{/* <GithubIcon /> */}</ListItemIcon>
             <ListItemText primary="Github" />
           </ListItem>
 
           <ListItem button component={"a"} href="https://robohash.org/">
-            <ListItemIcon>
-              <WebIcon />
-            </ListItemIcon>
+            <ListItemIcon>{/* <WebIcon /> */}</ListItemIcon>
             <ListItemText primary="RoboHash" />
           </ListItem>
         </List>
@@ -96,7 +90,7 @@ const SideDrawer: React.FC<any> = () => {
 
       <List subheader={<ListSubheader>Settings</ListSubheader>}>
         <ListItem>
-          <ListItemIcon>{isDarkTheme ? <DarkMode /> : <LightMode />}</ListItemIcon>
+          <ListItemIcon>{/* {isDarkTheme ? <DarkMode /> : <LightMode />} */}</ListItemIcon>
           <ListItemText id="switch-list-label-bluetooth" primary="Dark Mode" />
           <ListItemSecondaryAction>
             <Switch
@@ -110,9 +104,7 @@ const SideDrawer: React.FC<any> = () => {
 
         {installable && (
           <ListItem>
-            <ListItemIcon>
-              <InstallIcon />
-            </ListItemIcon>
+            <ListItemIcon>{/* <InstallIcon /> */}</ListItemIcon>
             <ListItemText id="switch-list-label-bluetooth" primary="Install PWA" />
             <ListItemSecondaryAction>
               <Switch

@@ -18,11 +18,11 @@ import {
 } from "@material-ui/core";
 
 import { useTheme } from "@material-ui/core/styles";
-import PersonIcon from "@material-ui/icons/Person";
-import FingerPrintIcon from "@material-ui/icons/Fingerprint";
-import EmailIcon from "@material-ui/icons/Email";
-import PhoneIcon from "@material-ui/icons/Phone";
-import WebsiteIcon from "@material-ui/icons/Public";
+// import PersonIcon from "@material-ui/icons/Person";
+// import FingerPrintIcon from "@material-ui/icons/Fingerprint";
+// import EmailIcon from "@material-ui/icons/Email";
+// import PhoneIcon from "@material-ui/icons/Phone";
+// import WebsiteIcon from "@material-ui/icons/Public";
 
 const RobotDetail: React.FC<any> = () => {
   const { id } = useParams<{ id: string }>();
@@ -56,45 +56,35 @@ const RobotDetail: React.FC<any> = () => {
         <List className={classes.list}>
           <ListItem>
             <ListItemAvatar>
-              <Avatar>
-                <PersonIcon />
-              </Avatar>
+              <Avatar>{/* <PersonIcon /> */}</Avatar>
             </ListItemAvatar>
             <ListItemText primary="Name" secondary={robot.name} />
           </ListItem>
 
           <ListItem>
             <ListItemAvatar>
-              <Avatar>
-                <FingerPrintIcon />
-              </Avatar>
+              <Avatar>{/* <FingerPrintIcon /> */}</Avatar>
             </ListItemAvatar>
             <ListItemText primary="Username" secondary={robot.username} />
           </ListItem>
 
           <ListItem>
             <ListItemAvatar>
-              <Avatar>
-                <EmailIcon />
-              </Avatar>
+              <Avatar>{/* <EmailIcon /> */}</Avatar>
             </ListItemAvatar>
             <ListItemText primary="Email" secondary={robot.email} />
           </ListItem>
 
           <ListItem>
             <ListItemAvatar>
-              <Avatar>
-                <PhoneIcon />
-              </Avatar>
+              <Avatar>{/* <PhoneIcon /> */}</Avatar>
             </ListItemAvatar>
             <ListItemText primary="Phone" secondary={robot.phone} />
           </ListItem>
 
           <ListItem>
             <ListItemAvatar>
-              <Avatar>
-                <WebsiteIcon />
-              </Avatar>
+              <Avatar>{/* <WebsiteIcon /> */}</Avatar>
             </ListItemAvatar>
             <ListItemText primary="Website" secondary={robot.website} />
           </ListItem>
