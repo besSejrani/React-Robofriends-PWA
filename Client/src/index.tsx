@@ -15,6 +15,8 @@ import { PersistGate } from "redux-persist/integration/react";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 
+// ======================================================================================
+
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate persistor={persistor}>

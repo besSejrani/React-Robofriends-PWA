@@ -18,7 +18,7 @@ const TabNavigation = () => {
   const classes = useStyles();
 
   return (
-    <BottomNavigation className={classes.root}>
+    <BottomNavigation className={classes.root} sx={{ display: { xs: "block", md: "none" } }}>
       <BottomNavigationAction component={Link} to="/" label="Home" icon={<HomeIcon />} />
 
       <BottomNavigationAction

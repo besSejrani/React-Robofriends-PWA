@@ -7,7 +7,7 @@ import { IAppState } from "@Redux/rootReducer";
 import { selectFilterRobots } from "@Redux/robots/robotSelector";
 
 // Components
-import MaterialCard from "@Components/MaterialCard";
+import MaterialCard from "@Components/Card/MaterialCard";
 
 // Material Styles
 import { makeStyles } from "@mui/styles";

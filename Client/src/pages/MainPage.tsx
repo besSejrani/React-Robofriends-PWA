@@ -4,8 +4,8 @@ import React from "react";
 import Container from "@mui/material/Container";
 
 // Components
-import SearchBox from "@Components/SearchBox";
-import CardList from "@Components/CardList";
+import SearchBox from "@Components/Search/SearchBox";
+import CardList from "@Components/Card/CardList";
 
 // Material Styles
 import { makeStyles } from "@mui/styles";
