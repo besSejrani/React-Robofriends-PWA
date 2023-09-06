@@ -1,138 +1,59 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 
 // React DOM
 import { Link } from "react-router-dom";
 
-// Redux
-import { useDispatch, useSelector } from "react-redux";
-import { toggleSideDrawer, toggleTheme } from "../Redux/ui/uiActions";
-import { IAppState } from "@Redux/rootReducer";
-
 // Material UI
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
 import Drawer from "@mui/material/Drawer";
+import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/BottomNavigationAction";
-import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
-import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
-import Switch from "@mui/material/Switch";
 
 // Material Styles
 import { makeStyles } from "@mui/styles";
 
-import LightMode from "@mui/icons-material/Brightness4";
-import DarkMode from "@mui/icons-material/BrightnessHigh";
-import HomeIcon from "@mui/icons-material/Home";
-import GithubIcon from "@mui/icons-material/GitHub";
-import WebIcon from "@mui/icons-material/Public";
-import InstallIcon from "@mui/icons-material/GetApp";
+// Icons
+import { MdPeopleOutline, MdOutlineChat } from "react-icons/md";
 
 // ======================================================================================
 
 type Anchor = "left";
 
 const SideDrawer: React.FC<any> = () => {
-  const [installable, setInstallable] = useState(false);
-  let defferedPrompt: any = useRef(null);
-
   const classes = useStyles();
-  const dispatch = useDispatch();
-
-  const isDarkTheme = useSelector((state: IAppState) => state.ui.isDarkTheme);
-  const isSideDrawerOpen = useSelector((state: IAppState) => state.ui.isSideDrawerOpen);
-
-  useEffect(() => {
-    window.addEventListener("beforeinstallprompt", (event) => {
-      event.preventDefault();
-      defferedPrompt.current = event;
-      setInstallable(true);
-    });
-
-    window.addEventListener("appinstalled", () => {
-      console.log("INSTALL: Success");
-    });
-  }, [installable]);
-
-  const handleInstallClick = () => {
-    if (defferedPrompt) {
-      defferedPrompt.current.prompt();
-
-      defferedPrompt.current.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === "dismissed") {
-          console.log("user cancelled installation");
-        } else {
-          console.log("user added to homescreen");
-          defferedPrompt.current = null;
-          setInstallable(false);
-        }
-      });
-    }
-  };
 
   const list = (anchor: Anchor) => (
-    <div className={classes.list}>
-      {
-        <List subheader={<ListSubheader>Links</ListSubheader>}>
-          <ListItem component={Link} to="/">
-            <HomeIcon color="action" />
+    <Box>
+      <Toolbar />
 
-            <ListItemText primary="Home" />
-          </ListItem>
+      <div className={classes.list}>
+        <List subheader={<ListSubheader>Manageemnt</ListSubheader>}>
+          <Link to="/admin/rooms" style={{ textDecoration: "none" }}>
+            <ListItem>
+              <MdOutlineChat size={25} style={{ margin: "0rem 0.5rem 0rem 0rem" }} />
+              <Typography>Rooms</Typography>
+            </ListItem>
+          </Link>
 
-          <ListItem component={"a"} href="https://github.com/besSejrani">
-            <GithubIcon color="action" />
-            <ListItemText primary="Github" />
-          </ListItem>
-
-          <ListItem component={"a"} href="https://robohash.org/">
-            <WebIcon color="action" />
-            <ListItemText primary="RoboHash" />
-          </ListItem>
+          <Link to="/admin/users" style={{ textDecoration: "none" }}>
+            <ListItem>
+              <MdPeopleOutline size={25} style={{ margin: "0rem 0.5rem 0rem 0rem" }} />
+              <Typography>Users</Typography>
+            </ListItem>
+          </Link>
         </List>
-      }
-
-      <Divider />
-
-      <List subheader={<ListSubheader>Settings</ListSubheader>}>
-        <ListItem>
-          {isDarkTheme ? <DarkMode color="action" /> : <LightMode color="action" />}
-          <ListItemText id="switch-list-label-bluetooth" primary="Dark Mode" />
-          <ListItemSecondaryAction>
-            <Switch
-              checked={isDarkTheme}
-              onChange={() => dispatch(toggleTheme())}
-              edge="end"
-              inputProps={{ "aria-labelledby": "switch-list-label-bluetooth" }}
-            />
-          </ListItemSecondaryAction>
-        </ListItem>
-
-        {installable && (
-          <ListItem>
-            <InstallIcon color="action" />
-            <ListItemText id="switch-list-label-bluetooth" primary="Install PWA" />
-            <ListItemSecondaryAction>
-              <Switch
-                onChange={handleInstallClick}
-                edge="end"
-                inputProps={{ "aria-labelledby": "switch-list-label-bluetooth" }}
-              />
-            </ListItemSecondaryAction>
-          </ListItem>
-        )}
-      </List>
-
-      <Divider />
-    </div>
+      </div>
+    </Box>
   );
 
   return (
     <div>
       {(["left"] as Anchor[]).map((anchor) => (
         <React.Fragment key={anchor}>
-          <Drawer anchor={anchor} open={isSideDrawerOpen} onClose={() => dispatch(toggleSideDrawer())}>
+          <Drawer variant="permanent" anchor={anchor}>
             {list(anchor)}
           </Drawer>
         </React.Fragment>
@@ -147,6 +68,6 @@ export default SideDrawer;
 
 const useStyles = makeStyles({
   list: {
-    width: 250,
+    width: 200,
   },
 });

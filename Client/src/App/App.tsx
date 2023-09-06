@@ -14,6 +14,8 @@ import MainPage from "@Pages/MainPage";
 const RobotDetail = lazy(() => import("@Pages/RobotDetail"));
 const NotFound = lazy(() => import("@Pages/NotFound"));
 const Login = lazy(() => import("@Pages/Login"));
+const AdminChats = lazy(() => import("@Pages/Admin/Rooms"));
+const AdminUsers = lazy(() => import("@Pages/Admin/Users"));
 
 // ======================================================================================
 
@@ -37,6 +39,9 @@ const App = () => {
             <Route path="/" element={<MainPage />} />
             <Route path="/friend/:id" element={<RobotDetail />} />
             <Route path="/login" element={<Login />} />
+
+            <Route path="/admin/rooms" element={<AdminChats />} />
+            <Route path="/admin/users" element={<AdminUsers />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

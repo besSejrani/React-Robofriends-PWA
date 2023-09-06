@@ -19,10 +19,10 @@ type Nav = {
 const index: React.FC<Nav> = ({ children }) => {
   return (
     <>
-      <Paper>
-        <Header />
-        {children}
-      </Paper>
+      <Header />
+
+      <div style={{ padding: "50px 20px 0px 260px" }}>{children}</div>
+
       <SideBar />
       <Tab />
     </>

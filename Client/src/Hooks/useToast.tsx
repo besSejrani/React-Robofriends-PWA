@@ -5,11 +5,12 @@ import { toast } from "react-toastify";
 
 interface ToastProps {
   message: string;
-  color?: "#ff0000" | "#00ff00" | "#0000ff";
+  color?: "#ff0000" | "#00ff00" | "var(--mainBlue)";
+  theme: "light" | "dark";
 }
 
 const useToast = (options: ToastProps) => {
-  toast.dark(`${options.message}`, {
+  toast(`${options.message}`, {
     position: "bottom-right",
     autoClose: 5000,
     hideProgressBar: false,
@@ -18,6 +19,7 @@ const useToast = (options: ToastProps) => {
     draggable: true,
     progress: undefined,
     progressStyle: { background: `${options.color}` },
+    theme: options.theme,
   });
 };
 
