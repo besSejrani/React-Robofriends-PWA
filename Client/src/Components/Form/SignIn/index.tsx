@@ -25,6 +25,12 @@ import GithubIcon from "@mui/icons-material/GitHub";
 // Components
 import InputForm from "@Components/Form/inputs";
 
+// Request
+import axios from "axios";
+
+// Hooks
+import useUriServer from "@Hooks/useUriServer";
+
 // ========================================================================================================
 
 type FormValues = {
@@ -55,7 +61,15 @@ const SignIn = () => {
   // ==============================
   //          Events
   // ==============================
+  const uri = useUriServer();
   const onSubmit = async (form) => {
+    console.log("form", form);
+
+    const { data } = await axios.post(`${uri}/signin`, { email: form.email, password: form.password });
+    console.log(data);
+
+    window.localStorage.setItem("token", data.authorization);
+
     // await useToast({ message: "Successful Authentication", color: "#00ff00" });
   };
 

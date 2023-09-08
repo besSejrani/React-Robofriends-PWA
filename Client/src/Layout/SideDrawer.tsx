@@ -30,7 +30,7 @@ const SideDrawer: React.FC<any> = () => {
       <Toolbar />
 
       <div className={classes.list}>
-        <List subheader={<ListSubheader>Manageemnt</ListSubheader>}>
+        <List subheader={<ListSubheader>Management</ListSubheader>}>
           <Link to="/admin/rooms" style={{ textDecoration: "none" }}>
             <ListItem>
               <MdOutlineChat size={25} style={{ margin: "0rem 0.5rem 0rem 0rem" }} />

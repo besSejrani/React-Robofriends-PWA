@@ -22,6 +22,7 @@
     "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
+      "@Models/*": ["./src/Models/*"],
       "@Error/*": ["./src/Error/*"]
     },
     "typeRoots": ["Types", "./node_modules/@types"]

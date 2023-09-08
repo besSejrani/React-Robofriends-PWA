@@ -6,27 +6,39 @@ import SideBar from "@Layout/SideDrawer";
 import Tab from "@Layout/Tab";
 
 // Material UI
-import Paper from "@mui/material/Paper";
+import { Box } from "@mui/material";
 
 // Material Theme
 import { withTheme as WithTheme } from "./Theme";
+
+// Redux
+import { useSelector } from "react-redux";
+import { IAppState } from "@Redux/rootReducer";
 
 // ======================================================================================
 
 type Nav = {
   children: JSX.Element[] | JSX.Element;
 };
-const index: React.FC<Nav> = ({ children }) => {
+const Layout = ({ children }) => {
+  const user = useSelector((state: IAppState) => state.ui.user);
+
   return (
     <>
       <Header />
 
-      <div style={{ padding: "50px 20px 0px 260px" }}>{children}</div>
+      {user.isAuth ? (
+        <Box>
+          <div style={{ padding: "50px 20px 0px 260px" }}>{children}</div>
 
-      <SideBar />
+          <SideBar />
+        </Box>
+      ) : (
+        <Box>{children}</Box>
+      )}
       <Tab />
     </>
   );
 };
 
-export default WithTheme(index);
+export default WithTheme(Layout);

@@ -15,6 +15,12 @@ import { makeStyles } from "@mui/styles";
 // Components
 import InputForm from "@Components/Form/inputs";
 
+// Request
+import axios from "axios";
+
+// Hooks
+import useUriServer from "@Hooks/useUriServer";
+
 // ========================================================================================================
 
 type FormValues = {
@@ -53,13 +59,21 @@ const SignUp = () => {
   // ==============================
   //          Events
   // ==============================
-  const onSubmit = async (form) => {
-    console.log("form", form);
+  const uri = useUriServer();
 
+  const onSubmit = async (form) => {
     if (password !== confirmPassword) {
       await alert("passwords don't match");
       return;
     }
+
+    await axios.post(`${uri}/signup`, {
+      firstname: form.firstname,
+      lastname: form.lastname,
+      username: form.username,
+      email: form.email,
+      password: form.password,
+    });
   };
 
   return (

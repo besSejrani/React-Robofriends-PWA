@@ -28,11 +28,16 @@ import { BsSun } from "react-icons/bs";
 import { IoMoonOutline } from "react-icons/io5";
 import { AiOutlineDownload } from "react-icons/ai";
 
+// Redux
+import { useSelector } from "react-redux";
+import { IAppState } from "@Redux/rootReducer";
+
 // ======================================================================================
 
 const Header: React.FC<any> = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const user = useSelector((state: IAppState) => state.ui.user);
 
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -94,13 +99,17 @@ const Header: React.FC<any> = () => {
     setAnchorElUser(null);
   };
 
+  console.log(user);
+
+  const robotAvatar = user?.user?.username || "default";
+
   return (
     <div className={classes.root}>
       <AppBar position="fixed">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             <Link to="/" style={{ color: "white", textDecoration: "none" }}>
-              RoboFriend
+              Roboworld
             </Link>
           </Typography>
 
@@ -112,11 +121,13 @@ const Header: React.FC<any> = () => {
                 </Typography>
               </Link>
 
-              <Link to="/login" style={{ textDecoration: "none" }}>
-                <Typography textAlign="center" style={{ color: "white" }}>
-                  Login
-                </Typography>
-              </Link>
+              {!user.isAuth ? (
+                <Link to="/login" style={{ textDecoration: "none" }}>
+                  <Typography textAlign="center" style={{ color: "white" }}>
+                    Login
+                  </Typography>
+                </Link>
+              ) : null}
             </Box>
 
             {/* <ButtonHeaderAction action={() => Action()}> */}
@@ -135,40 +146,42 @@ const Header: React.FC<any> = () => {
               </Box>
             )}
 
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar
-                    alt="Bes"
-                    src={`https://robohash.org/bes?size=100x100`}
-                    style={{ border: "1px solid white" }}
-                  />
-                </IconButton>
-              </Tooltip>
+            {user.isAuth ? (
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar
+                      alt="Bes"
+                      src={`https://robohash.org/${robotAvatar}?size=100x100`}
+                      style={{ border: "1px solid white", backgroundColor: "white" }}
+                    />
+                  </IconButton>
+                </Tooltip>
 
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+            ) : null}
           </Box>
         </Toolbar>
       </AppBar>

@@ -2,16 +2,8 @@
 
 const useUri = () => {
   let uri;
-  if (process.env.NEXT_PUBLIC_APP_ENV === "development") {
-    uri = process.env.NEXT_PUBLIC_DEVELOPMENT_CLIENT;
-  }
-
-  if (process.env.NEXT_PUBLIC_APP_ENV === "staging") {
-    uri = process.env.NEXT_PUBLIC_STAGING_CLIENT;
-  }
-
-  if (process.env.NEXT_PUBLIC_APP_ENV === "production") {
-    uri = process.env.NEXT_PUBLIC_PRODUCTION_CLIENT;
+  if (process.env.REACT_APP_ENV === "development") {
+    uri = process.env.REACT_APP_DEVELOPMENT_CLIENT;
   }
 
   return uri;

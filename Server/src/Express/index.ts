@@ -5,14 +5,14 @@ import 'dotenv/config'
 import express from 'express'
 
 // Database
-// import mongo from "../Models/mongo";
+import Database from '../Models/database'
 
 // Configuration
 import cors from 'cors'
 import helmet from 'helmet'
 
 // Routes
-// import PlanningRoutes from "../Routes/plannings";
+import AuthRoutes from '../Routes/auth'
 
 // ========================================================================================================
 
@@ -31,10 +31,11 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 // Services
-// mongo();
+const database = new Database()
+database.connection()
 
 // Routes
-// app.use("/", PlanningRoutes);
+app.use('/', AuthRoutes)
 
 // Listen to server
 const port = process.env.PORT || 6000

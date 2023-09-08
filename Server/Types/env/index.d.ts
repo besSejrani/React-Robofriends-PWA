@@ -6,5 +6,6 @@ declare namespace NodeJS {
     MONGO_ATLAS: string
 
     CORS_DOMAIN: string
+    JWT_SECRET: string
   }
 }

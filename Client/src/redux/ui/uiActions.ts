@@ -16,4 +16,11 @@ export const toggleTheme = () => {
   };
 };
 
+export const getUser = (payload: any) => {
+  return {
+    type: uiTypes.GET_USER,
+    payload,
+  };
+};
+
 // ========================================================================================================

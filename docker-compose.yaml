@@ -1,6 +1,10 @@
 version: "3.8"
 
 services:
+  #====================================================
+  #                       Client
+  #====================================================
+
   client:
     build:
       context: ./Client
@@ -8,10 +12,56 @@ services:
       - frontend
     ports:
       - "3000:3000"
+    depends_on:
+      - server
     volumes:
       - ./Client:/app
+
+  #====================================================
+  #                       Server
+  #====================================================
+
+  server:
+    build:
+      context: ./Server
+    container_name: server
+
+    networks:
+      - backend
+      - frontend
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV2=${ENVIRONMENT}
+    env_file:
+      - ./Server/.env
+    volumes:
+      - ./Server:/app
+
+  #====================================================
+  #                       MongoDB
+  #====================================================
+
+  mongo:
+    container_name: mongodb
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+    networks:
+      - backend
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: root-db
+    volumes:
+      - ./Mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ~/Desktop/roboworld/Mongo:/data/db
 
   # ===========================================================================================================================
 
 networks:
+  backend:
   frontend:
